@@ -1,0 +1,9 @@
+Doc 1 : Electric automotive maker Tesla Inc. is likely to introduce its products in India sometime in the summer of 2017.
+Doc 2 : Automotive major Mahindra likely to introduce driverless cars
+Doc 3 : BMW plans to introduce its own motorcycles in india
+Doc 4 : Just drive, a self-drive car rental firm uses smart vehicle technology based on IoT
+Doc 5 : Automotive industry going to hire thousands in 2018
+Doc 6 : Famous cricket player  Dhoni brought his priced car Hummer which is an SUV
+Doc 7 : Dhoni led india to its second world cup victory
+Doc 8 : IoT in cars will lead to more safety and make driverless vehicle revolution possible
+Doc 9 : Sachin recommended Dhoni for the indian skipper post
