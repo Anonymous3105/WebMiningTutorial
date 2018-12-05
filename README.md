@@ -1,1 +1,1 @@
-# WebMiningTutorial
+# Web Data Mining Tutorial
