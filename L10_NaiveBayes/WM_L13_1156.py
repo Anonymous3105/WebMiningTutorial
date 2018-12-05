@@ -28,7 +28,7 @@ class NBClassifier():
 
 	def load_data(self, train_data, target=None):
 		self.train_data = train_data
-		if target:
+		if not target:
 			self.target = self.train_data.columns[-1]
 		else:
 			self.target = target

@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-import string
 import re
 from pprint import pprint
 
@@ -23,17 +22,15 @@ class Indexer():
 		self.data_dict = {}
 
 	def get_words(self, text):
-		text = re.sub(r'[^\w\s]','',text)
+		text = re.sub(r'[^\w\s]', '', text)
 		return re.split(r'\s*', text)
-		
+
 	def get_data_from_file(self, fname):
 		try:
 			with open(fname) as file:
 				self.data_dict[fname] = self.get_words(file.read().lower())
 		except IOError:
 			print("File does not exist!")
-
-
 
 	def get_data_from_url(self, url):
 		try:
@@ -57,10 +54,11 @@ class Indexer():
 
 	def index_data(self):
 		for fname in self.data_dict.keys():
-			print("Indexing {} words from the source: {}".format(len(self.data_dict[fname]), fname))
+			print("Indexing {} words from the source: {}".format(
+				len(self.data_dict[fname]), fname)
+			)
 			for i in range(len(self.data_dict[fname])):
 				self.add_word_to_index(i, fname, self.data_dict[fname][i])
-
 
 	def get_data(self, srcfname):
 		try:
@@ -79,5 +77,5 @@ class Indexer():
 viti = Indexer()
 viti.get_data("srcfile.txt")
 viti.index_data()
-		
+
 pprint_data_to_file(viti.index_list, 'index.idx')
