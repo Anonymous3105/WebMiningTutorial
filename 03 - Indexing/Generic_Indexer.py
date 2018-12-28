@@ -35,7 +35,7 @@ class Indexer():
 	def get_data_from_url(self, url):
 		try:
 			page = requests.get(url)
-		except Exception as e:
+		except Exception:
 			try:
 				print("Failed to reached {}".format(url))
 			except UnicodeEncodeError:

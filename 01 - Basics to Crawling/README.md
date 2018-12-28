@@ -1,6 +1,6 @@
 Note: This part of the tutorial assumes that you have Python3 installed on your machine along with the package requests.
 
-* If not you can install them using the following commands in a UNIX terminal window:
+* If not installed, you can install them using the following commands in a UNIX terminal window:
 	+ sudo apt-get install python3 python3-pip
 	+ sudo pip3 install requests
 
