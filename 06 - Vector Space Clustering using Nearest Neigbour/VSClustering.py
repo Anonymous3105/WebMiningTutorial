@@ -68,7 +68,6 @@ class VSCluster():
 
 	def get_hier_data(self, doclist=None, wordmap=None):
 		if doclist is None or wordmap is None:
-		if doclist is None or wordmap is None:
 			print("Given empty doclist or wordmap. Can't fit it")
 		else:
 			self.doclist = doclist
@@ -195,7 +194,13 @@ class VSCluster():
 
 if __name__ == "__main__":
 	wordlist = [
-		"automotive", "car", "motorcycle", "self-drive", "iot", "hire", "dhoni"
+		"automotive",
+		"car",
+		"motorcycle",
+		"self-drive",
+		"iot",
+		"hire",
+		"dhoni"
 	]
 	docfile = "docfile.txt"
 

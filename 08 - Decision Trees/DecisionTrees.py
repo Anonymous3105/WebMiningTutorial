@@ -1,8 +1,8 @@
-import numpy as np
 import pandas as pd
 
 from pprint import pprint
 from math import log
+
 
 class DecisionTree():
 	def __init__(self):
@@ -14,18 +14,16 @@ class DecisionTree():
 		target_value_counts = target_vals.value_counts()
 		for val in target_vals.unique():
 			size = target_value_counts[val]
-			entropy -= log(size/tot_size) * size/tot_size
+			entropy -= log(size / tot_size) * size / tot_size
 
 		return entropy
-
-		
 
 	def fit(self, data, target):
 		self.data = data
 		self.target = target
-		outcom_counts = self.data.loc[:, self.target].unique().shape[0]
+		self.outcom_counts = self.data.loc[:, self.target].unique().shape[0]
 
-	def generate_subtree_tree(self, data = pd.DataFrame([]), parent=-1, tree = {}, parentval = None):
+	def generate_subtree_tree(self, data=pd.DataFrame([]), parent=-1, tree={}, parentval=None):
 		if data.empty:
 			data = self.data
 
@@ -38,10 +36,14 @@ class DecisionTree():
 			nodenumber = 0
 
 		for col in data.columns:
-			#  If column is target, the computed entropy is the entropy is the current dataset
+
+			# If column is target, the computed entropy
+			# is the entropy is the current dataset
 			if col == self.target:
 				entropy[col] = self.calc_entropy(data.loc[:, col])
-			# Else each column has different values having different target values, for which entropies are computed indivisually
+
+			# Else each column has different values having different target values,
+			# for which entropies are computed indivisually
 			# And their weighted sum in computed
 			else:
 				tot_size = data.shape[0]
@@ -56,21 +58,17 @@ class DecisionTree():
 				continue
 			infoGains[col] = entropy[self.target] - entropy[col]
 
-		# pprint(infoGains)
-		# Based on the maximum InfoGain the dataset is split on the basis of that column 
+		# Based on the maximum InfoGain the dataset
+		# is split on the basis of that column
 		# And the function is performed on indivisual subsets recursively
-		maxkey = max(infoGains, key = lambda key: infoGains[key])
-		# print(maxkey)
+		maxkey = max(infoGains, key=lambda key: infoGains[key])
 
 		if infoGains[maxkey] == 0:
-			tree[nodenumber] = (parent, data.iloc[0,:][self.target], True, parentval)
+			tree[nodenumber] = (parent, data.iloc[0, :][self.target], True, parentval)
 			return tree
 
 		else:
-			# if parent == -1:
 			tree[nodenumber] = (parent, maxkey, False, parentval)
-			# else:
-				# tree[nodenumber] = (parent, maxkey, False, )
 
 			for curr_val in data.loc[:, maxkey].unique():
 				subset_data = data.loc[(data[maxkey] == curr_val), :]
@@ -81,34 +79,32 @@ class DecisionTree():
 		else:
 			return tree
 
-
 	def print_tree(self):
 		pprint(self.tree)
 		print()
 
-	def show_tree(self, pnode = 0, level = 0):
-		if self.tree[pnode][3] == None:
+	def show_tree(self, pnode=0, level=0):
+		if self.tree[pnode][3] is None:
 			strdata = str(pnode) + " split at " + str(self.tree[pnode][1])
 		else:
 			if not self.tree[pnode][2]:
-				strdata = str(pnode) + " parent value = " + str(self.tree[pnode][3]) + " split at " + str(self.tree[pnode][1])
-			else:	
-				strdata = str(pnode) + " parent value = " + str(self.tree[pnode][3]) + " results at target: " + str(self.tree[pnode][1])
-		print(" "  * 2 * level, '-' * (level), strdata, sep='')
+				strdata = str(pnode) + " parent value = " + str(
+					self.tree[pnode][3]
+				) + " split at " + str(
+					self.tree[pnode][1]
+				)
+
+			else:
+				strdata = str(pnode) + " parent value = " + str(
+					self.tree[pnode][3]
+				) + " results at target: " + str(
+					self.tree[pnode][1]
+				)
+
+		print(" " * 2 * level, '-' * (level), strdata, sep='')
+
 		for node in [k for k in self.tree if self.tree[k][0] == pnode]:
-			self.show_tree(node, level+1)
-
-
-# datamat = [
-# 	["val1", "val3", "val5", "no"],
-# 	["val1", "val4", "val5", "yes"],
-# 	["val2", "val3", "val5", "yes"],
-# 	["val2", "val4", "val6", "no"],
-# ]
-# datacols = ["param1", "param2", "param3", "target"]
-
-# data = pd.DataFrame(datamat)
-# data.columns = datacols
+			self.show_tree(node, level + 1)
 
 
 data = pd.read_csv("data.csv")
