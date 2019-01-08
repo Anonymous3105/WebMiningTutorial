@@ -130,7 +130,9 @@ class KMeans_Clusterer():
 				temp_clus[sorted(temp_clus.keys())[j]].append(doci)
 
 			if temp_clus == self.clusters:
-				print("Clusters converged at {} iterations of {}.".format(i, self.num_iter))
+				print("Clusters converged at {} iterations of {}.".format(
+					i, self.num_iter)
+				)
 				break
 			else:
 				self.clusters = temp_clus
